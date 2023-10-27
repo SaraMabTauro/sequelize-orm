@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const publicacionController = require('../controllers/publicacionController'); 
+const {publicacionController, agregarPublicaciones} = require('../controllers/publicacionController'); 
+const publicacionSchema = require('../models/publicacion')
 
+router.post('/publicaciones', agregarPublicaciones);
 
 router.get('/buscarPorUsuario/:usuarioId', async (req, res) => {
   const usuarioId = req.params.usuarioId;

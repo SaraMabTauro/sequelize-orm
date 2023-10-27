@@ -1,30 +1,33 @@
-const sequelize = require('../connection/connect');
+const {sequelize} = require('../connection/connect')
 const Usuario = require('./usuario');
+const {Sequelize} = require('sequelize');
+
+
 
 const Publicacion = sequelize.define('Publicacion', {
     id:{
-        type: sequelize.INTEGER,
+        type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
     },
 
     titulo:{
-        type: sequelize.STRING,
+        type: Sequelize.STRING,
     },
 
     contenido:{
-        type: sequelize.TEXT,
+        type: Sequelize.TEXT,
     },
 
     fechaCreacion:{
-        type: sequelize.DATE,
+        type: Sequelize.DATE,
     },
 
     usuarioId:{
-        type: sequelize.INTEGER,
+        type: Sequelize.INTEGER,
         references:{
             model: Usuario,
-            key: id,
+            key: "id",
         },
     },
 });

@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const comentarioController = require('../controllers/comentarioController');
+const {comentarioController, agregarComentario} = require('../controllers/comentarioController');
+const comentarioSchema = require('../models/comentario')
+
+router.post('/comentarios', agregarComentario);
 
 
 router.get('/buscarPorPublicacion/:publicacionId', async (req, res) => {

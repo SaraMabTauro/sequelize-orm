@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const usuarioController = require('../controllers/usuarioController'); 
+const {usuarioController, agregarUsuario} = require('../controllers/usuarioController'); 
+const Usuario = require('../models/usuario');
+
+router.post('/usuarios', agregarUsuario);
 
 
 router.get('/buscarPorEmail/:email', async (req, res) => {

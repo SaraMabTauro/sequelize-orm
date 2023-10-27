@@ -1,26 +1,27 @@
-const sequelize = require('../connection/connect');
+const {sequelize} = require('../connection/connect');
 const Publicacion = require('./publicacion');
+const { Sequelize } = require('sequelize')
 
-const Comentario = sequelize.define ('Comentario', {
-    id:{
-        type: sequelize.INTEGER,
+const Comentario = sequelize.define('Comentario', {
+    id: {
+        type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
     },
 
-    contenido:{
-        type: sequelize.TEXT,
+    contenido: {
+        type: Sequelize.TEXT,
     },
 
-    fechaCreacion:{
-        type: sequelize.DATE,
+    fechaCreacion: {
+        type: Sequelize.DATE,
     },
 
-    publicacionId:{
-        type: sequelize.INTEGER,
-        references:{
+    publicacionId: {
+        type: Sequelize.INTEGER,
+        references: {
             model: Publicacion,
-            key: id,
+            key: 'id',
         },
     },
 });

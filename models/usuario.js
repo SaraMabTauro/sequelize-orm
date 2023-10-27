@@ -1,20 +1,29 @@
-const sequelize = require('../connection/connect');
+const { sequelize } = require('../connection/connect');
+const {Sequelize} = require('sequelize')
 
 const Usuario = sequelize.define('Usuario', {
-    id:{
-        type: sequelize.INTEGER,
+    id: {
+        type: Sequelize.INTEGER,
         primaryKey: true,
-        autoIncrement:true,
+        autoIncrement: true,
     },
 
-    nombre:{
-        type: sequelize.STRING,
+    nombre: {
+        type: Sequelize.STRING,
     },
 
-    email:{
-        type: sequelize.STRING,
+    email: {
+        type: Sequelize.STRING, 
     },
 
 });
+
+Usuario.sync()
+    .then(() => {
+        console.log('Modelo de Usuario sincronizado con la base de datos');
+    })
+    .catch((error) => {
+        console.error('Error al sincronizar el modelo de Usuario:', error);
+    });
 
 module.exports = Usuario;

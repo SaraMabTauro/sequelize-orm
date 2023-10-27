@@ -1,16 +1,14 @@
 const { Sequelize } = require('sequelize');
-require('dotenv').config();
 
-const DB_URL = process.env.DB_URL;
-
-const sequelize = new Sequelize(DB_URL, {
-  dialect: 'mysql', 
+const sequelize = new Sequelize("mysql://root:123456@localhost:3306/Social_Media", {
+  dialect: 'mysql',
   define: {
     timestamps: false,
   },
 });
 
 const connectToDatabase = async () => {
+
   try {
 
     await sequelize.authenticate();
