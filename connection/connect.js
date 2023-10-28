@@ -1,6 +1,6 @@
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize("mysql://root:123456@localhost:3306/Social_Media", {
+const sequelize = new Sequelize("mysql://root:123456@127.0.0.1:3306/Social_Media", {
   dialect: 'mysql',
   define: {
     timestamps: false,

@@ -6,7 +6,7 @@ const agregarPublicaciones = async (req, res) => {
     
     const { titulo, contenido, fechaCreacion, usuarioId } = req.body;
 
-    const nuevaPublicacion = await publicacionSchema.create({ titulo, contenido, fechaCreacion, usuarioId });
+    const nuevaPublicacion = await Publicacion.create({ titulo, contenido, fechaCreacion, usuarioId });
 
     res.status(201).json({ publicacion: nuevaPublicacion });
 
@@ -28,7 +28,11 @@ async function buscarPublicacionesPorUsuario(usuarioId) {
   }
 }
 
+
+
+
 module.exports = {
   buscarPublicacionesPorUsuario,
-  agregarPublicaciones
+  agregarPublicaciones,
+  
 };

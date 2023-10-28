@@ -30,5 +30,25 @@ router.get('/buscarPorUsuario/:usuarioId', async (req, res) => {
 });
 
 
+router.delete('/publicaciones/:fechaCreacion', async (req, res) => {
+  const { fechaCreacion } = req.params; 
+  try {
+    const resultado = await publicacionSchema.destroy({
+      where: {
+        fechaCreacion: fechaCreacion
+      }
+    });
+
+    if (resultado === 0) {
+      return res.status(404).json({ message: 'No se encontraron publicaciones para eliminar' }); 
+    }
+    return res.json({ message: 'Publicación eliminada' }); 
+  } catch (error) {
+    console.error('Error al eliminar la publicación:', error);
+    return res.status(500).json({ error: 'Error al eliminar la publicación' });
+  }
+});
+
+
 
 module.exports = router;

@@ -6,7 +6,7 @@ const agregarComentario = async (req, res) => {
 
     const { contenido, fechaCreacion, publicacionId } = req.body;
 
-    const nuevoComentario = await comentarioSchema.create({ contenido, fechaCreacion, publicacionId });
+    const nuevoComentario = await Comentario.create({ contenido, fechaCreacion, publicacionId });
 
     res.status(201).json({ comentario: nuevoComentario });
 
