@@ -36,7 +36,36 @@ async function buscarComentariosPorPublicacion(publicacionId) {
   }
 }
 
+
+const deleteCommentsbyDate = (req, res) => {
+
+  const { fecha, idPublicacion } = req.params
+
+  try {
+
+    const comentarioE = comentarioSchema.destroy({
+      where: {
+        fechaCreacion: fecha,
+        publicacionId: idPublicacion
+      }
+    })
+
+    if (comentarioE === 0) {
+      return res.status(404).json({ message: 'No se encontraron comentarios para eliminar' });
+
+    }
+    return res.json({ message: 'Comentario eliminado' });
+
+  } catch (error) {
+
+    console.error('Error al eliminar el comentario:', error);
+    return res.status(500).json({ error: 'Error al eliminar el comentario' });
+
+  }
+}
+
 module.exports = {
   buscarComentariosPorPublicacion,
-  agregarComentario
+  agregarComentario,
+  deleteCommentsbyDate
 };
