@@ -20,22 +20,6 @@ const agregarComentario = async (req, res) => {
 
 }
 
-async function buscarComentariosPorPublicacion(publicacionId) {
-  try {
-
-    const comentarios = await Comentario.findAll({
-      where: { PublicacionId: publicacionId },
-    });
-
-    return comentarios;
-
-  } catch (error) {
-
-    throw error;
-
-  }
-}
-
 
 const deleteCommentsbyDate = (req, res) => {
 
@@ -43,7 +27,7 @@ const deleteCommentsbyDate = (req, res) => {
 
   try {
 
-    const comentarioE = comentarioSchema.destroy({
+    const comentarioE = Comentario.destroy({
       where: {
         fechaCreacion: fecha,
         publicacionId: idPublicacion
@@ -63,6 +47,18 @@ const deleteCommentsbyDate = (req, res) => {
 
   }
 }
+
+const buscarComentariosPorPublicacion = async (req, res) => {
+  try {
+    const comentarios = await Comentario.findAll({
+      where: { publicacionId: req.params.publicacionId }, 
+      include: [Publicacion] // Aca se incluye la relación con el modelo de Publicación para obtener los detalles de la publicación ojito :)
+    });
+    res.json(comentarios);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 
 module.exports = {
   buscarComentariosPorPublicacion,

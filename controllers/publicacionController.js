@@ -17,21 +17,11 @@ const agregarPublicaciones = async (req, res) => {
   }
 }
 
-async function buscarPublicacionesPorUsuario(usuarioId) {
-  try {
-    const publicaciones = await Publicacion.findAll({
-      where: { UsuarioId: usuarioId },
-    });
-    return publicaciones;
-  } catch (error) {
-    throw error;
-  }
-}
 
 const deletePublicationByDate = async (req, res) => {
   const { fechaCreacion } = req.params;
   try {
-    const resultado = await publicacionSchema.destroy({
+    const resultado = await Publicacion.destroy({
       where: {
         fechaCreacion: fechaCreacion
       }
@@ -47,11 +37,20 @@ const deletePublicationByDate = async (req, res) => {
   }
 }
 
-
+const buscarPublicacionesPorUsuario = async (req, res) => {
+  try {
+    const publicaciones = await Publicacion.findAll({
+      where: { usuarioId: req.params.usuarioId }, 
+      include: [Usuario]
+    });
+    res.json(publicaciones);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 
 module.exports = {
   buscarPublicacionesPorUsuario,
   agregarPublicaciones,
   deletePublicationByDate
-
 };

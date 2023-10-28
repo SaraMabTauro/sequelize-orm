@@ -18,16 +18,17 @@ const agregarUsuario = async (req, res) => {
   }
 }
 
-async function buscarUsuarioPorEmail(email) {
+const buscarUsuarioPorEmail = async (req, res) => {
+  const email = req.params.email; 
   try {
-    const usuario = await Usuario.findOne({
-      where: { email: email },
+    const usuarios = await Usuario.findAll({
+      where: { email: email } 
     });
-    return usuario;
+    res.json(usuarios);
   } catch (error) {
-    throw error;
+    res.status(500).json({ error: error.message });
   }
-}
+};
 
 const deleteUsers = (req, res) => {
 
