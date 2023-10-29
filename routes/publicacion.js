@@ -31,7 +31,7 @@ router.get('/buscarPorUsuario/:usuarioId', async (req, res) => {
 
 
 router.delete('/publicaciones/:fechaCreacion', async (req, res) => {
-  const { fechaCreacion } = req.params; 
+  const  fechaCreacion  = new Date(req.params.fechaCreacion); 
   try {
     const resultado = await publicacionSchema.destroy({
       where: {
@@ -42,7 +42,7 @@ router.delete('/publicaciones/:fechaCreacion', async (req, res) => {
     if (resultado === 0) {
       return res.status(404).json({ message: 'No se encontraron publicaciones para eliminar' }); 
     }
-    return res.json({ message: 'Publicación eliminada' }); 
+    return res.json({message:"eliminado" }); 
   } catch (error) {
     console.error('Error al eliminar la publicación:', error);
     return res.status(500).json({ error: 'Error al eliminar la publicación' });

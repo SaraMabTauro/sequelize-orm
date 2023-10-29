@@ -32,7 +32,8 @@ router.get('/buscarPorPublicacion/:publicacionId', async (req, res) => {
 });
 
 router.delete('/comentario/:fecha/:idPublicacion',(req,res)=>{
-  const {fecha,idPublicacion}=req.params
+  const fecha=new Date(req.params.fecha)
+  const idPublicacion=req.params.idPublicacion
   try {
     const comentarioE=comentarioSchema.destroy({
       where:{
@@ -43,7 +44,7 @@ router.delete('/comentario/:fecha/:idPublicacion',(req,res)=>{
     if (comentarioE === 0) {
       return res.status(404).json({ message: 'No se encontraron comentarios para eliminar' }); 
     }
-    return res.json({ message: 'Comentario eliminado' }); 
+    return res.json({message:"eliminado" }); 
 
   } catch (error) {
     console.error('Error al eliminar el comentario:', error);
